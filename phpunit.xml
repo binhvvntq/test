@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="bootstrap/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Feature Tests">
+            <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite>
+
+        <testsuite name="Unit Tests">
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Functionals Tests">
+            <directory suffix="Test.php">./tests/Functionals</directory>
+        </testsuite>
+
+        <testsuite name="FlaxDB Tests">
+            <directory suffix="Test.php">./tests/FlaxDB</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <!-- テスト対象 -->
+            <directory suffix=".php">./app/Console</directory>
+            <directory suffix=".php">./app/Http</directory>
+            <directory suffix=".php">./app/Flax</directory>
+            <directory suffix=".php">./app/Reas</directory>
+            <!-- テスト除外 -->
+            <exclude>
+                <!-- 接尾語で除外 -->
+                <directory suffix="Interface.php">./app</directory>
+                <directory suffix="Exception.php">./app</directory>
+                <!-- ディレクトリで除外 -->
+                <directory>./app/Providers</directory>
+                <directory>./app/Flax/Providers</directory>
+                <directory>./app/Reas/Providers</directory>
+                <directory>./app/Reas/Facades</directory>
+                <directory>./app/Reas/Constants</directory>
+                <!-- ファイルで除外 -->
+                <file>./app/Console/Kernel.php</file>
+                <file>./app/Exceptions/Handler.php</file>
+                <file>./app/Http/Kernel.php</file>
+                <file>./app/Http/Controllers/Controller.php</file>
+                <file>./app/Http/Controllers/Web/TemplateController.php</file>
+                <file>./app/Http/Middleware/Authenticate.php</file>
+                <file>./app/Http/Middleware/EncryptCookies.php</file>
+                <file>./app/Http/Middleware/RedirectIfAuthenticated.php</file>
+                <file>./app/Http/Middleware/TrimStrings.php</file>
+                <file>./app/Http/Middleware/VerifyCsrfToken.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+    </php>
+    <logging>
+        <!-- 必要になったらコメントアウト -->
+        <!--<log type="coverage-clover" target="build/logs/clover.xml"/>-->
+        <!--<log type="coverage-html"   target="build/html"/>-->
+    </logging>
+</phpunit>
